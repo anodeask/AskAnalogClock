@@ -1,8 +1,20 @@
 import { useEffect, useState } from 'react';
 
+import './Clock.css'
 
-function AnalogClock({onClick})  {
-	const now = new Date();
+function AnalogClock({onClick,timezone})  {
+
+	let now;
+	
+	const date = new Date();
+	if (timezone) {
+		const localTime = date.toLocaleString("en-US", { timeZone: timezone });
+		now = new Date(localTime);
+	} else {
+		now = new Date();
+	}
+
+	console.log("now",now,timezone);
 		
 	const seconds = now.getSeconds();
 	const minutes = now.getMinutes();
