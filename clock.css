@@ -27,6 +27,8 @@
 }
 .hand.minute {
   height: 6px;
+  width: 40%;
+  left: 10%;
   background-color: #555;
 }
 
