@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 
 import './Clock.css'
 
-function AnalogClock({onClick,timezone})  {
+function AnalogClock({onClick,timezone,isStatic})  {
 
 	let now;
 	
@@ -13,7 +13,17 @@ function AnalogClock({onClick,timezone})  {
 	} else {
 		now = new Date();
 	}
-
+	if(!isStatic) {
+		const [count,setCount] =useState(0)
+		useEffect(() => {
+			const timer = setInterval(() => {
+				setCount(new Date());
+			}, 1000);
+			
+			// Clean up the interval when component unmounts
+			return () => clearInterval(timer);
+		}, []);  // Empty dependency array means this runs once on mount
+	}
 	console.log("now",now,timezone);
 		
 	const seconds = now.getSeconds();
